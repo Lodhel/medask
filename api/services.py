@@ -37,5 +37,3 @@ class MainServices:
 
             return data_type, company
 
-
-MainServices().check_data("987654-3210")
