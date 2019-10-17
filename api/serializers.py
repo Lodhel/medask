@@ -1,4 +1,4 @@
-from . import models
+from . import models, services
 from rest_framework import serializers
 
 
@@ -12,5 +12,6 @@ class MainSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         model_fields = models.Main(**validated_data)
         model_fields.save()  # сохраняем в БД при необходимости
+        services.MainServices().check_data(validated_data["number"])  # проверка данных
 
         return model_fields
