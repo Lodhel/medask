@@ -9,12 +9,33 @@ class MainServices:
         result = pattern.findall(number)
         result = "".join(map(str, result))
 
-        result_type = "dms"
+        data_type = "dms"
+        company = "СК МЕД-АСКЕР"
         if len(result) == 12:
             pass
         elif len(result) == 10:
-            result_type = "oms"
-        return result_type
+            data_type = "oms"
 
 
-MainServices().check_data("9876-543210")
+        pattern = re.compile("[-]")
+        result = pattern.findall(number)
+
+        if result:
+            pattern = re.compile("[\d -]")
+            result = pattern.findall(number)
+            result = [n for n, r in enumerate(result) if r not in (re.compile("\d")).findall("0123456789")]
+            if result[0] == 4:
+                if data_type == "dms":
+                    company = "СК Рандеву"
+                else:
+                    company = "Страх-трах"
+            elif result[0] == 2:
+                if data_type == "oms":
+                    company = "СК Рандеву"
+                else:
+                    company = "Страх-трах"
+
+            return data_type, company
+
+
+MainServices().check_data("987654-3210")
