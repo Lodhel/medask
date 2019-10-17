@@ -1,0 +1,4 @@
+*env
+api/__pycache__
+medask/__pycache__
+.idea
